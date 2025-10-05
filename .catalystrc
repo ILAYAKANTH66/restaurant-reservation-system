@@ -1,0 +1,30 @@
+{
+  "defaults": {
+    "project": 1,
+    "env": 1
+  },
+  "actives": {
+    "project": 1,
+    "env": 1
+  },
+  "projects": [
+    {
+      "idx": 1,
+      "id": "19142000000010233",
+      "name": "reserverestaurent",
+      "domain": {
+        "id": "50034287840",
+        "name": "reserverestaurent-60050905834.development"
+      },
+      "timezone": "Asia/Kolkata",
+      "env": [
+        {
+          "idx": 1,
+          "id": "60050905834",
+          "name": "Development",
+          "type": 3
+        }
+      ]
+    }
+  ]
+}
