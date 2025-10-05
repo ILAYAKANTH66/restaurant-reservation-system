@@ -126,7 +126,19 @@ router.post('/register', [
     });
   } catch (error) {
     console.error('Registration error:', error);
-    res.status(500).json({ message: 'Server error' });
+    // Duplicate email key error
+    if (error && error.code === 11000 && error.keyPattern && error.keyPattern.email) {
+      return res.status(400).json({ message: 'User already exists with this email' });
+    }
+    // Mongoose validation errors
+    if (error && error.name === 'ValidationError') {
+      const messages = Object.values(error.errors).map(e => e.message);
+      return res.status(400).json({
+        message: messages[0] || 'Validation failed',
+        errors: messages
+      });
+    }
+    return res.status(500).json({ message: 'Server error' });
   }
 });
 

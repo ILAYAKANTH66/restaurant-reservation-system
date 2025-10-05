@@ -52,9 +52,11 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true };
     } catch (error) {
+      const serverMessage = error.response?.data?.message;
+      const validationMessage = error.response?.data?.errors?.[0]?.msg;
       return { 
         success: false, 
-        error: error.response?.data?.message || 'Login failed' 
+        error: validationMessage || serverMessage || 'Login failed' 
       };
     }
   };
@@ -88,9 +90,11 @@ export const AuthProvider = ({ children }) => {
       
       return { success: true };
     } catch (error) {
+      const serverMessage = error.response?.data?.message;
+      const validationMessage = error.response?.data?.errors?.[0]?.msg;
       return { 
         success: false, 
-        error: error.response?.data?.message || 'Registration failed' 
+        error: validationMessage || serverMessage || 'Registration failed' 
       };
     }
   };
