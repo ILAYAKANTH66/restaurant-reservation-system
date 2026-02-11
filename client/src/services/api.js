@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// Create axios instance with default config
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api',
   headers: {
@@ -8,7 +7,7 @@ const api = axios.create({
   },
 });
 
-// Request interceptor to add auth token
+
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
@@ -22,12 +21,12 @@ api.interceptors.request.use(
   }
 );
 
-// Response interceptor to handle errors
+
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Token expired or invalid, redirect to login
+      
       localStorage.removeItem('token');
       window.location.href = '/login';
     }
@@ -35,7 +34,7 @@ api.interceptors.response.use(
   }
 );
 
-// Auth API calls
+
 export const authAPI = {
   register: (userData) => api.post('/auth/register', userData),
   login: (credentials) => api.post('/auth/login', credentials),
@@ -44,7 +43,7 @@ export const authAPI = {
   updateProfile: (profileData) => api.put('/auth/profile', profileData),
 };
 
-// Restaurants API calls
+
 export const restaurantsAPI = {
   getAll: (filters = {}) => api.get('/restaurants', { params: filters }),
   getById: (id) => api.get(`/restaurants/${id}`),

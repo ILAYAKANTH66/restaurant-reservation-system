@@ -63,7 +63,7 @@ const seedData = async () => {
       email: 'info@italiandelight.com',
       website: 'https://italiandelight.com',
       rating: 4.5,
-      priceRange: '$$$',
+      priceRange: '\u20B9\u20B9\u20B9',
       capacity: 50,
       openingHours: {
         monday: { open: '11:00', close: '22:00' },
@@ -99,7 +99,7 @@ const seedData = async () => {
       email: 'info@sushimaster.com',
       website: 'https://sushimaster.com',
       rating: 4.8,
-      priceRange: '$$$$',
+      priceRange: '\u20B9\u20B9\u20B9\u20B9',
       capacity: 30,
       openingHours: {
         monday: { open: '17:00', close: '22:00' },
@@ -135,7 +135,7 @@ const seedData = async () => {
       email: 'info@burgerjoint.com',
       website: 'https://burgerjoint.com',
       rating: 4.2,
-      priceRange: '$$',
+      priceRange: '\u20B9\u20B9',
       capacity: 40,
       openingHours: {
         monday: { open: '11:00', close: '22:00' },

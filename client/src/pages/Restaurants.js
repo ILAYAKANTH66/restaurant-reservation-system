@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { restaurantsAPI } from '../services/api';
-import { Search, MapPin, Star, DollarSign, Filter, ArrowLeft } from 'lucide-react';
+import { Search, MapPin, Star, IndianRupee, Filter, ArrowLeft } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { priceRangeOptions, getPriceRangeLabel } from '../constants/priceRanges';
 
 const Restaurants = () => {
   const [restaurants, setRestaurants] = useState([]);
@@ -39,7 +40,6 @@ const Restaurants = () => {
   );
 
   const cuisineOptions = [...new Set(restaurants.map(r => r.cuisine))];
-  const priceRanges = ['$', '$$', '$$$', '$$$$'];
   const ratingOptions = [4, 3, 2, 1];
 
   const clearFilters = () => {
@@ -115,8 +115,10 @@ const Restaurants = () => {
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
             <option value="">All Prices</option>
-            {priceRanges.map(price => (
-              <option key={price} value={price}>{price}</option>
+            {priceRangeOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
             ))}
           </select>
 
@@ -184,8 +186,10 @@ const Restaurants = () => {
                     {restaurant.name}
                   </h3>
                   <div className="flex items-center gap-1">
-                    <DollarSign className="h-4 w-4 text-gray-500" />
-                    <span className="text-sm text-gray-600">{restaurant.priceRange}</span>
+                    <IndianRupee className="h-4 w-4 text-gray-500" />
+                    <span className="text-sm text-gray-600">
+                      {getPriceRangeLabel(restaurant.priceRange)}
+                    </span>
                   </div>
                 </div>
 

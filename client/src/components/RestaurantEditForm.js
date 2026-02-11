@@ -3,10 +3,14 @@ import { useForm } from 'react-hook-form';
 import { restaurantsAPI } from '../services/api';
 import { X, Plus, Trash2 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { priceRangeOptions } from '../constants/priceRanges';
 
 const RestaurantEditForm = ({ restaurant, onClose, onUpdate }) => {
   const [loading, setLoading] = useState(false);
   const [menuItems, setMenuItems] = useState(restaurant.menu || []);
+  const [imageUrls, setImageUrls] = useState(
+    restaurant.images && restaurant.images.length > 0 ? restaurant.images : ['']
+  );
 
   const {
     register,
@@ -36,6 +40,20 @@ const RestaurantEditForm = ({ restaurant, onClose, onUpdate }) => {
     setMenuItems([...menuItems, { name: '', description: '', price: 0, category: '' }]);
   };
 
+  const addImageField = () => {
+    setImageUrls([...imageUrls, '']);
+  };
+
+  const updateImageField = (index, value) => {
+    const updated = [...imageUrls];
+    updated[index] = value;
+    setImageUrls(updated);
+  };
+
+  const removeImageField = (index) => {
+    setImageUrls(imageUrls.filter((_, i) => i !== index));
+  };
+
   const removeMenuItem = (index) => {
     setMenuItems(menuItems.filter((_, i) => i !== index));
   };
@@ -53,7 +71,8 @@ const RestaurantEditForm = ({ restaurant, onClose, onUpdate }) => {
       const updateData = {
         ...data,
         menu: menuItems.filter(item => item.name.trim() !== ''),
-        features: data.features || []
+        features: data.features || [],
+        images: imageUrls.map((url) => url.trim()).filter(Boolean)
       };
 
       await restaurantsAPI.update(restaurant._id, updateData);
@@ -218,10 +237,11 @@ const RestaurantEditForm = ({ restaurant, onClose, onUpdate }) => {
                   {...register('priceRange', { required: 'Price range is required' })}
                   className="input-field"
                 >
-                  <option value="$">$ - Budget</option>
-                  <option value="$$">$$ - Moderate</option>
-                  <option value="$$$">$$$ - Expensive</option>
-                  <option value="$$$$">$$$$ - Very Expensive</option>
+                  {priceRangeOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
                 </select>
                 {errors.priceRange && (
                   <p className="mt-1 text-sm text-red-600">{errors.priceRange.message}</p>
@@ -239,6 +259,44 @@ const RestaurantEditForm = ({ restaurant, onClose, onUpdate }) => {
                   <p className="mt-1 text-sm text-red-600">{errors.capacity.message}</p>
                 )}
               </div>
+            </div>
+
+            {/* Images */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-semibold text-gray-900">Images</h3>
+                <button
+                  type="button"
+                  onClick={addImageField}
+                  className="btn-secondary flex items-center gap-2"
+                >
+                  <Plus className="h-4 w-4" />
+                  Add Image
+                </button>
+              </div>
+              <p className="text-sm text-gray-500">
+                Update the gallery by providing direct image URLs (first image appears in listings).
+              </p>
+              {imageUrls.map((url, index) => (
+                <div key={index} className="flex gap-2">
+                  <input
+                    type="url"
+                    value={url}
+                    onChange={(e) => updateImageField(index, e.target.value)}
+                    className="input-field flex-1"
+                    placeholder="https://example.com/restaurant-image.jpg"
+                  />
+                  {imageUrls.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => removeImageField(index)}
+                      className="btn-secondary whitespace-nowrap"
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
+              ))}
             </div>
 
             {/* Menu Items */}

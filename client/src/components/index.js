@@ -1,4 +1,4 @@
-// Export all components
+
 export { default as LoadingSpinner } from './LoadingSpinner';
 export { default as Navbar } from './Navbar';
 export { default as RestaurantCard } from './RestaurantCard';

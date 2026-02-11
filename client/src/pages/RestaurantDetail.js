@@ -6,7 +6,7 @@ import { restaurantsAPI, reservationsAPI } from '../services/api';
 import { 
   MapPin, 
   Star, 
-  DollarSign, 
+  IndianRupee, 
   Phone, 
   Mail, 
   Globe, 
@@ -17,6 +17,14 @@ import {
   ArrowLeft
 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { getPriceRangeLabel } from '../constants/priceRanges';
+
+const formatPrice = (value) =>
+  new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 2
+  }).format(Number(value) || 0);
 
 const RestaurantDetail = () => {
   const { id } = useParams();
@@ -164,29 +172,29 @@ const RestaurantDetail = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-6">
-              <div className="flex items-center gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star
-                    key={i}
-                    className={`h-5 w-5 ${
-                      i < Math.floor(restaurant.rating)
-                        ? 'text-yellow-400 fill-current'
-                        : 'text-gray-300'
-                    }`}
-                  />
-                ))}
-                <span className="ml-2 text-gray-600">{restaurant.rating.toFixed(1)}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <DollarSign className="h-5 w-5 text-gray-500" />
-                <span className="text-gray-600">{restaurant.priceRange}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <Users className="h-5 w-5 text-gray-500" />
-                <span className="text-gray-600">Capacity: {restaurant.capacity}</span>
-              </div>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-1">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className={`h-5 w-5 ${
+                    i < Math.floor(restaurant.rating)
+                      ? 'text-yellow-400 fill-current'
+                      : 'text-gray-300'
+                  }`}
+                />
+              ))}
+              <span className="ml-2 text-gray-600">{restaurant.rating.toFixed(1)}</span>
             </div>
+            <div className="flex items-center gap-1">
+              <IndianRupee className="h-5 w-5 text-gray-500" />
+              <span className="text-gray-600">{getPriceRangeLabel(restaurant.priceRange)}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Users className="h-5 w-5 text-gray-500" />
+              <span className="text-gray-600">Capacity: {restaurant.capacity}</span>
+            </div>
+          </div>
 
             <div className="space-y-3">
               <div className="flex items-center gap-2">
@@ -245,7 +253,9 @@ const RestaurantDetail = () => {
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-sm font-medium text-gray-700">Price Range:</span>
-                <span className="text-sm text-gray-600">{restaurant.priceRange}</span>
+                <span className="text-sm text-gray-600">
+                  {getPriceRangeLabel(restaurant.priceRange)}
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-sm font-medium text-gray-700">Capacity:</span>
@@ -301,7 +311,7 @@ const RestaurantDetail = () => {
                       </span>
                     </div>
                     <span className="font-semibold text-gray-900 ml-4">
-                      ${item.price}
+                      {formatPrice(item.price)}
                     </span>
                   </div>
                 ))}

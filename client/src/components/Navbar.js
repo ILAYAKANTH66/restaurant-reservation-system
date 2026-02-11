@@ -53,7 +53,7 @@ const Navbar = () => {
                     <User className="h-5 w-5" />
                     <span>{user?.name}</span>
                   </button>
-                  
+
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                     <Link 
                       to="/profile" 

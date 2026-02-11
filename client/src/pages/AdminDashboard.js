@@ -12,7 +12,7 @@ const AdminDashboard = () => {
   });
   const [recentUsers, setRecentUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     fetchDashboardData();
   }, []);
@@ -20,8 +20,6 @@ const AdminDashboard = () => {
   const fetchDashboardData = async () => {
     try {
       setLoading(true);
-      // In a real app, you'd have specific admin endpoints
-      // For now, we'll simulate the data
       setStats({
         totalUsers: 1250,
         totalRestaurants: 89,

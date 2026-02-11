@@ -3,10 +3,10 @@ node_modules/
 client/node_modules/
 
 # Build outputs
+build/
+dist/
 client/build/
 client/dist/
-dist/
-build/
 
 # Caches
 .cache/
@@ -16,25 +16,22 @@ client/.cache/
 **/.vite/
 
 # Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+*.log
 logs/
 
-# Env and secrets
+# Environment files
 .env
 .env.*
 client/.env
 client/.env.*
 
-# OS / Editor
-.DS_Store
-Thumbs.db
+# Editor / OS
 .vscode/
 .idea/
+.DS_Store
+Thumbs.db
 
-# Misc
+# Coverage / temp
 coverage/
 .tmp/
 .temp/

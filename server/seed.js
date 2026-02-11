@@ -50,7 +50,7 @@ const sampleRestaurants = [
       country: 'USA'
     },
     capacity: 50,
-    priceRange: '$$',
+    priceRange: '\u20B9\u20B9',
     rating: 4.5,
     openingHours: {
       monday: { open: '11:00', close: '22:00' },
@@ -79,7 +79,7 @@ const sampleRestaurants = [
       country: 'USA'
     },
     capacity: 30,
-    priceRange: '$$$',
+    priceRange: '\u20B9\u20B9\u20B9',
     rating: 4.8,
     openingHours: {
       monday: { open: '11:30', close: '21:30' },
@@ -108,7 +108,7 @@ const sampleRestaurants = [
       country: 'USA'
     },
     capacity: 80,
-    priceRange: '$',
+    priceRange: '\u20B9',
     rating: 4.2,
     openingHours: {
       monday: { open: '11:00', close: '23:00' },
@@ -137,7 +137,7 @@ const sampleRestaurants = [
       country: 'USA'
     },
     capacity: 45,
-    priceRange: '$$',
+    priceRange: '\u20B9\u20B9',
     rating: 4.6,
     openingHours: {
       monday: { open: '11:00', close: '22:00' },
@@ -166,7 +166,7 @@ const sampleRestaurants = [
       country: 'USA'
     },
     capacity: 35,
-    priceRange: '$$$',
+    priceRange: '\u20B9\u20B9\u20B9',
     rating: 4.7,
     openingHours: {
       monday: { open: '17:00', close: '22:00' },

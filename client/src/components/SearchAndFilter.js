@@ -1,5 +1,6 @@
 import React from 'react';
 import { Search, Filter, X } from 'lucide-react';
+import { priceRangeOptions } from '../constants/priceRanges';
 
 const SearchAndFilter = ({ 
   searchTerm, 
@@ -12,7 +13,6 @@ const SearchAndFilter = ({
   showPriceFilter = true,
   showRatingFilter = true
 }) => {
-  const priceRanges = ['$', '$$', '$$$', '$$$$'];
   const ratingOptions = [4, 3, 2, 1];
 
   return (
@@ -56,8 +56,10 @@ const SearchAndFilter = ({
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
             <option value="">All Prices</option>
-            {priceRanges.map(price => (
-              <option key={price} value={price}>{price}</option>
+            {priceRangeOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
             ))}
           </select>
         )}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Star, DollarSign } from 'lucide-react';
+import { MapPin, Star, IndianRupee } from 'lucide-react';
+import { getPriceRangeLabel } from '../constants/priceRanges';
 
 const RestaurantCard = ({ restaurant }) => {
   return (
@@ -28,8 +29,10 @@ const RestaurantCard = ({ restaurant }) => {
             {restaurant.name}
           </h3>
           <div className="flex items-center gap-1">
-            <DollarSign className="h-4 w-4 text-gray-500" />
-            <span className="text-sm text-gray-600">{restaurant.priceRange}</span>
+            <IndianRupee className="h-4 w-4 text-gray-500" />
+            <span className="text-sm text-gray-600">
+              {getPriceRangeLabel(restaurant.priceRange)}
+            </span>
           </div>
         </div>
 
@@ -47,7 +50,7 @@ const RestaurantCard = ({ restaurant }) => {
                 key={i}
                 className={`h-4 w-4 ${
                   i < Math.floor(restaurant.rating)
-                    ? 'text-yellow-400 fill-current'
+          +          ? 'text-yellow-400 fill-current'
                     : 'text-gray-300'
                 }`}
               />
